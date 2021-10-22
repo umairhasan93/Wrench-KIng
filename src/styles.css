@@ -1,0 +1,248 @@
+@import url("https://fonts.googleapis.com/css?family=Rubik:300,400,500,700&display=swap");
+
+.show-log-pane {
+  display: block;
+  -webkit-transition: display 1s; /* Safari prior 6.1 */
+  transition: display 1s;
+  padding: 0 25px;
+}
+
+
+
+
+.heading {
+  font-weight: 300;
+  color: #2e384d;
+  font-size: 25px;
+  margin-left: 8.5rem
+  }
+
+.para {
+  color: #8798ad;
+  font-weight: 100;
+  font-size: 13px;
+  margin-left: 8.5rem;
+  margin-top: -15px;
+  margin-bottom: 20px;
+  }
+
+
+.form-control {
+    height: 41px;
+    border-radius: 5px;
+    background: #e0e7ff90;
+    border: 1px solid #e0e7ff;    
+    width: 250px;
+    margin-top: 5px;
+    padding-left: .73rem;
+    padding-right: .73rem;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input:focus
+{
+    border: 2px solid #1670BE50;
+    box-shadow: 0 0 3px #1670BE;
+    outline-offset: 0px;
+    outline: none;
+}
+
+.form-group:focus-within label {
+    color: dodgerblue;
+    
+}
+
+  .form-group {
+    margin-bottom: 1rem;
+    margin-left: 8.5rem;
+    color: #8798ad;
+}
+
+.labeled {
+    font-weight: 400;
+  color: #8798ad;
+  font-size: 14px;
+}
+
+.btn-primary {
+    width: 277px;
+    height: 50px;
+    background: #368f6c;
+    border: none;
+    font-size: 15px;
+    border-radius: 4px;
+    margin-left: 8.5rem;
+    color: white;
+  }
+
+  .btn-primary:hover {
+    border: none;
+    background: dodgerblue;
+  }
+
+  button:focus {
+    border: 1px solid #1670BE50;
+    box-shadow: 0 0 1px #1670BE;
+    outline-offset: 0px;
+    outline: none;
+    background: dodgerblue;
+  }
+
+  .mt-4 {
+    margin-top: 20px;
+  }
+
+  .paperB {
+    margin-top: 25px;
+    width: 601px;
+    height: 50px;
+    background: #368f6c;
+    border: none;
+    font-size: 15px;
+    border-radius: 4px;
+    margin-left: 3.74rem;
+    color: white;
+  }
+  button:hover {
+    border: none;
+    background: dodgerblue;
+  }
+
+  .dirty-input {
+    border: 1px solid #ff7474 !important;
+  }
+  p.error {
+    font-size: 12px;
+    color: #ff7474;
+    margin-left: 5px;
+  }
+
+  .container-fluid {
+    width: 100%;
+  }
+  
+  .data-pan {
+    position: absolute;
+    left: 0;
+    -webkit-transition: left 1s; /* Safari prior 6.1 */
+    transition: left 1s;
+  }
+
+  .data-pan-inner {
+    display: grid;
+    height: 80%;
+  }
+
+  .image-pan {
+    position: absolute;
+    right: 0;
+    -webkit-transition: right 1s; /* Safari prior 6.1 */
+    transition: right 1s;
+  }
+  
+  .image-pan {
+    min-width: 600px;
+    background-image: url("./Assets/Wrench\ King.gif");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .signup .image-pan .image-pan-user {
+    position: absolute;
+    right: 50% !important;
+    -webkit-transition: right 1s; /* Safari prior 6.1 */
+    transition: right 1s;
+  }
+
+  .logo {
+    background-image: url("./Assets/Wrench\ King.gif");
+    width: 132px;
+    height: 68px;
+    display: block;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-left: 265px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    
+  }
+
+  .data-pan {
+    overflow: none;
+  }
+
+  .container-fluid {
+    position: relative;
+  }
+  .full-height {
+    height: 100vh;
+  }
+
+  .row {
+    height: 130px;
+  }
+
+  .r {
+    display:flex;
+    flex-direction: row;
+    
+  }
+
+                                      /* CALENDER */
+
+  .md-calendar-booking .mbsc-calendar-text {
+    text-align: center;
+}
+
+.md-calendar-booking .booking-datetime .mbsc-datepicker-tab-calendar {
+    flex: 1 1 0;
+    min-width: 300px;
+}
+
+.md-calendar-booking .mbsc-timegrid-item {
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+}
+
+.md-calendar-booking .mbsc-timegrid-container {
+    top: 30px;
+}
+
+                           /* BILLING */
+
+.data {
+  background-color: #800080;
+  width: auto;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.App {
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+                                         /* HOME */
+
+.homeDiv {
+  height: 600px;
+  width: 1100px;
+  background-image: url("./Assets/Wrench\ King.gif");
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-position: center;
+}
