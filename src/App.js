@@ -1,19 +1,34 @@
-import Admin from "./Screens/Auth/Admin";
+import authAdmin from "./Screens/Auth/Admin";
 import Home from "./Screens/Home/index";
-import Registeration from "./Screens/Registeration";
 import { Redirect, BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import './styles.css'
+import SecureRoute from "./components/secureRoute";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
-function App() {
+const Admin = () => {
+  const isAuthenticated = localStorage.getItem('@admin')
+  return (
+    <Switch>
+      <SecureRoute path='/home' component={Home}></SecureRoute>
+      <Route exact path='/admin-login' component={authAdmin}></Route>
+      {isAuthenticated !== null ? (
+        <Redirect to='/home' />
+      ) : (
+        <Redirect to='/admin-login' />
+      )}
+    </Switch>
+  )
+}
+
+const App = () => {
   return (
     <div className="App">
       <Router >
         <Switch>
-
-          <Route exact path="/" component={Admin} />
-          <Route path="/home" component={Home} />
-          {/* {user.email !== "" && <Redirect to={'/home'} />} */}
+          <Admin />
         </Switch>
+        <ToastContainer />
       </Router>
     </div>
   );

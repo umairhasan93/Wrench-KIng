@@ -38,6 +38,19 @@
     padding-right: .73rem;
   }
 
+.form-controlR {
+  height: 41px;
+  border-radius: 5px;
+  background: #e0e7ff90;
+  border: 1px solid #e0e7ff;    
+  width: 250px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  padding-left: .73rem;
+  padding-right: .73rem;
+  font-size: 16px;
+}
+
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -57,7 +70,7 @@
     
 }
 
-  .form-group {
+.form-group {
     margin-bottom: 1rem;
     margin-left: 8.5rem;
     color: #8798ad;
@@ -85,20 +98,25 @@
     background: dodgerblue;
   }
 
-  button:focus {
+  /* button:focus {
     border: 1px solid #1670BE50;
     box-shadow: 0 0 1px #1670BE;
     outline-offset: 0px;
     outline: none;
     background: dodgerblue;
-  }
+  } */
 
   .mt-4 {
     margin-top: 20px;
   }
 
+  .field-required {
+    color: #ff0000;
+    font-size: 12px;
+  }
+
   .paperB {
-    margin-top: 25px;
+    margin-top: 35px;
     width: 601px;
     height: 50px;
     background: #368f6c;
@@ -107,6 +125,7 @@
     border-radius: 4px;
     margin-left: 3.74rem;
     color: white;
+    position: fixed;
   }
   button:hover {
     border: none;
@@ -117,9 +136,17 @@
     border: 1px solid #ff7474 !important;
   }
   p.error {
-    font-size: 12px;
+    font-size: 13px;
     color: #ff7474;
     margin-left: 5px;
+    margin-top: 6px;
+  }
+
+  p.errorR {
+    font-size: 13px;
+    color: #ff7474;
+    margin-left: 5px;
+    margin-top: -3px;
   }
 
   .container-fluid {
@@ -146,7 +173,7 @@
   }
   
   .image-pan {
-    min-width: 600px;
+    min-width: 670px;
     background-image: url("./Assets/Wrench\ King.gif");
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -219,7 +246,7 @@
                            /* BILLING */
 
 .data {
-  background-color: #800080;
+  background-color: #2A2422;
   width: auto;
   padding: 20px;
   margin-top: 20px;
@@ -245,4 +272,16 @@
   -o-background-size: cover;
   background-size: cover;
   background-position: center;
+}
+
+.Toastify__progress-bar--default{
+  background: #e3e3e3 !important;
+}
+.Toastify__toast--default {
+  background: #368f6c !important;
+  color: #fff !important;
+}
+.Toastify__close-button--default {
+  color: #fff !important;
+  opacity: 0.8 !important;
 }

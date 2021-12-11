@@ -108,7 +108,7 @@ const ListItem = withStyles({
 })(MuiListItem);
 
 
-export default function SideBar() {
+const SideBar = () => {
     const classes = useStyles();
 
     const [selectedIndex, setSelectedIndex] = React.useState(0);
@@ -120,7 +120,8 @@ export default function SideBar() {
 
     const history = useHistory();
     const handleSubmit = () => {
-        history.push('/')
+        localStorage.removeItem('@admin')
+        history.push('/admin-login')
     }
     return (
         <div className={classes.root}>
@@ -187,3 +188,5 @@ export default function SideBar() {
         </div>
     );
 }
+
+export default SideBar

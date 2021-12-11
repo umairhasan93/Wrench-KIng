@@ -12,17 +12,13 @@ function Billing() {
         { title: "Bill", field: "bill" },
     ];
 
-    useEffect(() => {
-        fetch("http://localhost:5000/api/users")
-            .then(resp => resp.json())
-            .then(resp => setData(resp))
-    }, [])
+
 
     return (
         <form className="data">
             <div className="App">
                 <MaterialTable
-                    title="USER"
+                    title="Bill"
                     data={data}
                     columns={columns}
 
