@@ -10,6 +10,8 @@ import { validateEmail, validatePassword, validateCnicNo, validateContactNo } fr
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 
+const API = process.env.REACT_APP_API_KEY
+
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
@@ -207,9 +209,10 @@ export default function Registeration() {
                     "Content-type": "application/json"
                 }
             }
+            let url = `${API}mechanics/register`
 
             const { data } = await axios.post(
-                'http://localhost:5000/api/mechanics/register',
+                url,
                 { name, cnicNo, contactNo, address, mechanicType, speciality, username, email, password, rating },
                 config
             )
