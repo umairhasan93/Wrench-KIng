@@ -14,7 +14,7 @@ export default function Home() {
             let user = localStorage.getItem('@admin')
             if (user) {
                 user = JSON.parse(user)
-                setUser(user?.user?.name)
+                setUser(user.name)
             }
         } catch (e) {
 

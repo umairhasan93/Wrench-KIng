@@ -4,6 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { css } from 'glamor'
 // import { validateEmail } from "../../shared/utils";
 
+const API = process.env.REACT_APP_API_KEY
 
 
 class SignInAdmin extends React.Component {
@@ -11,8 +12,8 @@ class SignInAdmin extends React.Component {
         super(props);
         this.state = {
             login: {
-                username: "",
-                password: "",
+                username: "umair007",
+                password: "63555",
             },
             errors: {
                 username: "",
@@ -63,17 +64,20 @@ class SignInAdmin extends React.Component {
 
         try {
             const { login } = this.state;
-
+            console.log(API);
+            let url = `${API}admin/login`;
+            console.log(url);
             const myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/json");
             const requestOptions = {
+
                 method: "POST",
                 headers: myHeaders,
-                redirect: "follow",
+                // redirect: "follow",
                 body: JSON.stringify({ username: login.username, password: login.password }),
             };
 
-            fetch('http://localhost:5000/api/admin/login', requestOptions)
+            fetch(url, requestOptions)
                 .then((response) => response.json())
                 .then((result) => {
                     console.log(result);

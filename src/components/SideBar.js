@@ -83,17 +83,17 @@ const ListItem = withStyles({
     root: {
         "&$selected": {
             backgroundColor: "white",
-            color: "green",
+            color: "red",
             textDecoration: "underline",
             "& .MuiListItemIcon-root": {
-                color: "green"
+                color: "red"
             }
         },
         "&$selected:hover": {
             backgroundColor: "white",
-            color: "green",
+            color: "red",
             "& .MuiListItemIcon-root": {
-                color: "green"
+                color: "red"
             }
         },
         "&:hover": {
@@ -108,7 +108,7 @@ const ListItem = withStyles({
 })(MuiListItem);
 
 
-const SideBar = () => {
+const SideBar = (props) => {
     const classes = useStyles();
 
     const [selectedIndex, setSelectedIndex] = React.useState(0);
@@ -137,7 +137,7 @@ const SideBar = () => {
                 <PersonOutlineOutlinedIcon className={classes.userIcon} />
                 <div className={classes.header}>
                     <h3 className={classes.heading}>Welcome</h3>
-                    <p className={classes.name}>Admin</p>
+                    <p className={classes.name}>{props.name}</p>
                 </div>
 
 

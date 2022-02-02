@@ -7,6 +7,8 @@ import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios'
 import { validateEmail, validatePassword, validateCnicNo, validateContactNo } from "../shared/utils";
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -16,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
             marginLeft: theme.spacing(-1),
             marginTop: theme.spacing(1.2),
             width: theme.spacing(90),
-            height: theme.spacing(68),
+            height: theme.spacing(75),
         },
     },
 
@@ -54,22 +56,31 @@ export default function Registeration() {
 
     //DATA STATES
     const history = useHistory()
-    const [name, setName] = useState()
+    const [name, setName] = useState("")
     const [cnicNo, setCnicNo] = useState('')
-    const [contactNo, setContactNo] = useState()
-    const [shopNo, setShopNo] = useState()
-    const [username, setUsername] = useState()
-    const [email, setEmail] = useState()
-    const [password, setPassword] = useState({})
-    const [confirmpassword, setConfirmPassword] = useState()
+    const [contactNo, setContactNo] = useState("")
+    const [address, setAddress] = useState("")
+    const [mechanicType, setMechanicType] = useState("")
+    const [speciality, setSpeciality] = useState("")
+    const [username, setUsername] = useState("")
+    const [email, setEmail] = useState("")
+    const [rating, setRating] = useState("2.0")
+    const [password, setPassword] = useState("")
+    const [confirmpassword, setConfirmPassword] = useState("")
 
     // ERROR STATES 
     const [message, setMessage] = useState(null)
     const [error, setError] = useState(false)
-    const [invalid, setInvalid] = useState()
-    const [passValidationError, setPassValidationError] = useState()
-    const [cnicValidationError, setCnicValidationError] = useState()
-    const [contactValidationError, setContactValidationError] = useState()
+    const [emailError, setEmailError] = useState()
+    const [passError, setPassError] = useState()
+    const [cnicError, setCnicError] = useState()
+    const [contactError, setContactError] = useState()
+    const [nameError, setNameError] = useState()
+    const [addressError, setAddressError] = useState()
+    const [mechanicTypeError, setMechanicTypeError] = useState()
+    const [specialityError, setSpecialityError] = useState()
+    const [usernameError, setUsernameError] = useState()
+    const [confirmpassError, setConfirmPassError] = useState()
 
     const handleNameChange = async (e) => {
         setName(e.target.value)
@@ -79,39 +90,21 @@ export default function Registeration() {
         setCnicNo(e.target.value)
     };
 
-    useEffect(() => {
-        const timeoutId = setTimeout(() => {
-            if (!validateCnicNo(cnicNo)) {
-                setCnicValidationError('Invalid Cnic Number');
-
-            } else {
-                setCnicValidationError("")
-                setCnicNo(cnicNo)
-            }
-        }, 5000);
-        return () => clearTimeout(timeoutId);
-    }, [cnicNo]);
-
-
     const handleContactNoChange = (e) => {
         setContactNo(e.target.value)
     };
 
-    useEffect(() => {
-        const timeoutId = setTimeout(() => {
-            if (!validateContactNo(contactNo)) {
-                setContactValidationError('Invalid Contact Number');
+    const handleAddressChange = (e) => {
+        setAddress(e.target.value)
+    };
 
-            } else {
-                setContactValidationError("")
-                setContactNo(contactNo)
-            }
-        }, 10000);
-        return () => clearTimeout(timeoutId);
-    }, [contactNo]);
+    const handleMechanicTypeChange = (e) => {
+        setMechanicType(e.target.value)
 
-    const handleShopNoChange = (e) => {
-        setShopNo(e.target.value)
+    };
+
+    const handleSpecialityChange = (e) => {
+        setSpeciality(e.target.value)
     };
 
     const handleUserNameChange = (e) => {
@@ -119,7 +112,7 @@ export default function Registeration() {
     };
 
     const handleEmailChange = (e) => {
-
+        setEmail(e.target.value)
 
     };
 
@@ -127,22 +120,85 @@ export default function Registeration() {
         setPassword(e.target.value)
     };
 
-
-
     const handleConfirmPasswordChange = (e) => {
         setConfirmPassword(e.target.value)
     };
 
+    const onBlurEmail = () => {
+        console.log(email)
+        if (!validateEmail(email)) {
+            setEmailError('Invalid Email Entered')
+            setEmail('')
+        } else {
+            setEmailError('')
+        }
+    }
+
+    const onBlurCnic = () => {
+        if (!validateEmail(email)) {
+            setCnicError('Invalid CNIC Entered')
+            setCnicNo('')
+        } else {
+            setCnicError('')
+        }
+    }
+
+    const onBlurContact = () => {
+        if (contactNo.length < 11) {
+            setContactError('Number must be Atleast 11 digits')
+            setContactNo('')
+        } else {
+            setContactError('')
+        }
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault()
+        console.log(mechanicType)
 
         if (password !== confirmpassword) {
             setMessage('Passwords Do Not Match')
             setConfirmPassword("");
         }
 
-        if (name === null || cnicNo === null || contactNo === null || shopNo === null || username === null || email === null || password === null || confirmpassword === null) {
-            toast.error('All Fields Are Required')
+        if (name === null) {
+            alert('Name Required')
+            console.log("EMPTY");
+        }
+        if (cnicNo === null) {
+            setCnicError('CNIC Required')
+        }
+
+        if (contactNo === null) {
+            setContactError('Contact Required')
+        }
+
+        if (address === null) {
+            setAddressError('Address Required')
+        }
+
+        if (mechanicType === null) {
+            setMechanicTypeError('Mechanic Type Required')
+        }
+
+        if (speciality === null) {
+            setSpecialityError('Speciality Required')
+        }
+
+        if (username === null) {
+            setUsernameError('Username Required')
+        }
+
+        if (email === null) {
+            setEmailError('Email Required')
+        }
+
+        if (password === null) {
+            setPassError('Password Required')
+        }
+
+        if (confirmpassword === null) {
+            setConfirmPassError('Confirm Password Required')
         }
 
         try {
@@ -154,12 +210,22 @@ export default function Registeration() {
 
             const { data } = await axios.post(
                 'http://localhost:5000/api/mechanics/register',
-                { name, cnicNo, contactNo, shopNo, username, email, password },
+                { name, cnicNo, contactNo, address, mechanicType, speciality, username, email, password, rating },
                 config
             )
             console.log(data);
             if (data !== null) {
                 toast('Mechanic Registered Successfully 😃')
+                setName('')
+                setCnicNo('')
+                setContactNo('')
+                setAddress('')
+                setEmail('')
+                setMechanicType('')
+                setSpeciality('')
+                setUsername('')
+                setPassword('')
+                setConfirmPassword('')
             }
 
         } catch (error) {
@@ -184,10 +250,13 @@ export default function Registeration() {
                                 type='text'
                                 autoComplete='Name'
                                 placeholder=''
-                                className='form-controlR'
+                                className={`form-controlR ${nameError ? "dirty-input" : ""} `}
                                 value={name}
                                 onChange={handleNameChange}
                             />
+                            {cnicError && (
+                                <p className="errorR">{nameError}</p>
+                            )}
                         </div>
 
                         <div className={classes.formgroup}>
@@ -196,13 +265,14 @@ export default function Registeration() {
 
                                 type='text'
                                 autoComplete='CNIC No'
-                                placeholder=''
-                                className={`form-controlR ${cnicValidationError ? "dirty-input" : ""} `}
+                                placeholder='xxxxx-xxxxxxx-x'
+                                className={`form-controlR ${cnicError ? "dirty-input" : ""} `}
                                 value={cnicNo}
                                 onChange={handleCnicNoChange}
+                                onBlur={onBlurCnic}
                             />
-                            {cnicValidationError && (
-                                <p className="errorR">{cnicValidationError}</p>
+                            {cnicError && (
+                                <p className="errorR">{cnicError}</p>
                             )}
                         </div>
 
@@ -214,30 +284,61 @@ export default function Registeration() {
                                 type='text'
                                 autoComplete={'Contact No'}
                                 placeholder=''
-                                className={`form-controlR ${contactValidationError ? "dirty-input" : ""}`}
+                                className={`form-controlR ${contactError ? "dirty-input" : ""}`}
                                 value={contactNo}
                                 onChange={handleContactNoChange}
+                                onBlur={onBlurContact}
                             />
-                            {contactValidationError && (
-                                <p className="errorR">{contactValidationError}</p>
+                            {contactError && (
+                                <p className="errorR">{contactError}</p>
                             )}
                         </div>
 
                         <div className={classes.formgroup}>
-                            <label className={classes.labeled}>Shop No<sup className="field-required">*</sup></label><br />
+                            <label className={classes.labeled}>Address<sup className="field-required">*</sup></label><br />
                             <input
                                 type='text'
-                                autoComplete={'Shop No'}
+                                autoComplete={'Address'}
                                 placeholder=''
                                 className='form-controlR'
-                                value={shopNo}
-                                onChange={handleShopNoChange}
+                                value={address}
+                                onChange={handleAddressChange}
+                            />
+                        </div>
+                    </div>
+
+                    <div className='r'>
+                        <div className={classes.formgroup}>
+                            <label className={classes.labeled}>Mechanic Type<sup className="field-required">*</sup></label><br />
+                            <Select
+                                className='selector'
+                                value={mechanicType}
+                                onChange={handleMechanicTypeChange}
+                                displayEmpty
+                                inputProps={{ 'aria-label': 'Without label' }}
+                            >
+                                <MenuItem value="">
+                                    <em>None</em>
+                                </MenuItem>
+                                <MenuItem value="Car">Car</MenuItem>
+                                <MenuItem value="Bike">Bike</MenuItem>
+                            </Select>
+                        </div>
+
+                        <div className={classes.formgroup}>
+                            <label className={classes.labeled}>Speciality<sup className="field-required">*</sup></label><br />
+                            <input
+                                type='text'
+                                autoComplete={'Speciality'}
+                                placeholder=''
+                                className='form-controlR'
+                                value={speciality}
+                                onChange={handleSpecialityChange}
                             />
                         </div>
 
-
-
                     </div>
+
                     <div className='r'>
 
                         <div className={classes.formgroup}>
@@ -258,10 +359,14 @@ export default function Registeration() {
                                 type='Email'
                                 autoComplete='Email'
                                 placeholder=''
-                                className='form-controlR'
+                                className={`form-controlR ${emailError ? "dirty-input" : ""}`}
                                 value={email}
                                 onChange={handleEmailChange}
+                                onBlur={onBlurEmail}
                             />
+                            {emailError && (
+                                <p className="errorR">{emailError}</p>
+                            )}
 
                         </div>
 

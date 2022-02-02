@@ -116,8 +116,8 @@
   }
 
   .paperB {
-    margin-top: 35px;
-    width: 601px;
+    margin-top: 15px;
+    width: 611px;
     height: 50px;
     background: #368f6c;
     border: none;
@@ -131,6 +131,18 @@
     border: none;
     background: dodgerblue;
   }
+
+  .selector{
+    width: 275px;
+    height: 47px;
+    border-radius: 5px;
+    background: #e0e7ff90;
+    border: 1px solid #e0e7ff;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+
 
   .dirty-input {
     border: 1px solid #ff7474 !important;
@@ -246,9 +258,10 @@
                            /* BILLING */
 
 .data {
-  background-color: #2A2422;
-  width: auto;
+  background-color: #ff0000;
+  width: 1000px;
   padding: 20px;
+  height:auto;
   margin-top: 20px;
 }
 
@@ -257,6 +270,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.Appp {
+  height: auto;
+  /* align-items: center; */
+  justify-content: center;
+  width: 300;
+  /* margin-left: 200px; */
 }
 
 

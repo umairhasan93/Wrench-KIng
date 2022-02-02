@@ -15,6 +15,6 @@ export function validateCnicNo(cnicNo) {
 }
 
 export function validateContactNo(contactNo) {
-    var re = /[0-9]{4}[-]{1}[0-9]{7}/
+    var re = /[0-9]{11}/
     return re.test(String(contactNo))
 }
