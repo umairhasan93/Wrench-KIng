@@ -12,8 +12,8 @@ class SignInAdmin extends React.Component {
         super(props);
         this.state = {
             login: {
-                username: "umair007",
-                password: "63555",
+                username: "",
+                password: "",
             },
             errors: {
                 username: "",
