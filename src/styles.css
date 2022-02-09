@@ -125,7 +125,7 @@
     border-radius: 4px;
     margin-left: 3.74rem;
     color: white;
-    position: fixed;
+    /* position: fixed; */
   }
   button:hover {
     border: none;

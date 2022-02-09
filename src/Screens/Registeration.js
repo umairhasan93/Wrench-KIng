@@ -9,6 +9,7 @@ import axios from 'axios'
 import { validateEmail, validatePassword, validateCnicNo, validateContactNo } from "../shared/utils";
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
+import MaskedInput from 'react-text-mask'
 
 const API = process.env.REACT_APP_API_KEY
 
@@ -20,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
             marginLeft: theme.spacing(-1),
             marginTop: theme.spacing(1.2),
             width: theme.spacing(90),
-            height: theme.spacing(75),
+            height: 'auto',
         },
     },
 
@@ -28,6 +29,12 @@ const useStyles = makeStyles((theme) => ({
         marginTop: 20,
         textAlign: 'center',
         fontSize: 30
+    },
+
+    form: {
+        height: 'auto',
+        paddingBottom: 20
+
     },
 
     row: {
@@ -88,41 +95,55 @@ export default function Registeration() {
         setName(e.target.value)
     };
 
+    // const format = (value) => {
+    //     return value.replace(/\s/g, "").match(/.{1,4}/g).join(" ").substr(0, 15) || ""
+    // }
+
     const handleCnicNoChange = (e) => {
+        setCnicError('')
         setCnicNo(e.target.value)
     };
 
     const handleContactNoChange = (e) => {
+        setContactError('')
         setContactNo(e.target.value)
     };
 
     const handleAddressChange = (e) => {
+        setAddressError('')
         setAddress(e.target.value)
     };
 
     const handleMechanicTypeChange = (e) => {
+        setMechanicTypeError('')
+        console.log(mechanicType)
         setMechanicType(e.target.value)
 
     };
 
     const handleSpecialityChange = (e) => {
+        setSpecialityError('')
         setSpeciality(e.target.value)
     };
 
     const handleUserNameChange = (e) => {
+        setUsernameError('')
         setUsername(e.target.value)
     };
 
     const handleEmailChange = (e) => {
+        setEmailError('')
         setEmail(e.target.value)
 
     };
 
     const handlePasswordChange = (e) => {
+        setPassError('')
         setPassword(e.target.value)
     };
 
     const handleConfirmPasswordChange = (e) => {
+        setConfirmPassError('')
         setConfirmPassword(e.target.value)
     };
 
@@ -137,7 +158,7 @@ export default function Registeration() {
     }
 
     const onBlurCnic = () => {
-        if (!validateEmail(email)) {
+        if (!validateCnicNo(cnicNo)) {
             setCnicError('Invalid CNIC Entered')
             setCnicNo('')
         } else {
@@ -154,53 +175,88 @@ export default function Registeration() {
         }
     }
 
+    const selectSpeciality = () => {
+        if (mechanicType === 'Car') {
+            return (
+                <Select
+                    className={`selector ${specialityError ? "dirty-input" : ""}`}
+                    value={speciality}
+                    onChange={handleSpecialityChange}
+                    displayEmpty
+                    inputProps={{ 'aria-label': 'Without label' }}
+                >
+
+                    <MenuItem value="Tuning">Tuning</MenuItem>
+                    <MenuItem value="Axle">Axle</MenuItem>
+                    <MenuItem value="A/C">A/C</MenuItem>
+                </Select>
+            )
+        } else {
+            return (
+                <Select
+                    className={`selector ${specialityError ? "dirty-input" : ""}`}
+                    value={speciality}
+                    onChange={handleSpecialityChange}
+                    displayEmpty
+                    inputProps={{ 'aria-label': 'Without label' }}
+                >
+                    <MenuItem value="All">
+                        All
+                    </MenuItem>
+                </Select>
+            )
+        }
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         console.log(mechanicType)
-
-        if (password !== confirmpassword) {
-            setMessage('Passwords Do Not Match')
-            setConfirmPassword("");
+        console.log(speciality)
+        if (name === '') {
+            setNameError('Name Required')
+            // console.log("EMPTY");
         }
 
-        if (name === null) {
-            alert('Name Required')
-            console.log("EMPTY");
-        }
-        if (cnicNo === null) {
+        if (cnicNo === '') {
             setCnicError('CNIC Required')
         }
 
-        if (contactNo === null) {
+        if (contactNo === '') {
             setContactError('Contact Required')
         }
 
-        if (address === null) {
+        if (address === '') {
             setAddressError('Address Required')
         }
 
-        if (mechanicType === null) {
+        if (mechanicType === '') {
             setMechanicTypeError('Mechanic Type Required')
         }
 
-        if (speciality === null) {
+        if (speciality === '') {
             setSpecialityError('Speciality Required')
         }
 
-        if (username === null) {
+        if (username === '') {
             setUsernameError('Username Required')
         }
 
-        if (email === null) {
+        if (email === '') {
             setEmailError('Email Required')
         }
 
-        if (password === null) {
+        if (password === '') {
             setPassError('Password Required')
         }
 
-        if (confirmpassword === null) {
+        if (confirmpassword === '') {
             setConfirmPassError('Confirm Password Required')
+        }
+
+        if (password !== confirmpassword) {
+            setMessage('Passwords Do Not Match')
+            toast.error('❕ Password Do not Match')
+            setConfirmPassword("");
         }
 
         try {
@@ -245,7 +301,7 @@ export default function Registeration() {
             <Paper elevation={10}>
 
                 <h3 className={classes.heading}>Mechanic Registeration Form</h3>
-                <form>
+                <form className={classes.form}>
                     <div className='r'>
                         <div className={classes.formgroup}>
                             <label className={classes.labeled}>Name<sup className="field-required">*</sup></label><br />
@@ -264,8 +320,9 @@ export default function Registeration() {
 
                         <div className={classes.formgroup}>
                             <label className={classes.labeled}>CNIC No<sup className="field-required">*</sup></label><br />
-                            <input
-
+                            <MaskedInput
+                                mask={[/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/]}
+                                guide={false}
                                 type='text'
                                 autoComplete='CNIC No'
                                 placeholder='xxxxx-xxxxxxx-x'
@@ -283,7 +340,9 @@ export default function Registeration() {
                     <div className='r'>
                         <div className={classes.formgroup}>
                             <label className={classes.labeled}>Contact No<sup className="field-required">*</sup></label><br />
-                            <input
+                            <MaskedInput
+                                mask={[/\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/]}
+                                guide={false}
                                 type='text'
                                 autoComplete={'Contact No'}
                                 placeholder=''
@@ -303,10 +362,14 @@ export default function Registeration() {
                                 type='text'
                                 autoComplete={'Address'}
                                 placeholder=''
-                                className='form-controlR'
+                                className={`form-controlR ${addressError ? "dirty-input" : ""}`}
                                 value={address}
                                 onChange={handleAddressChange}
                             />
+                            {addressError && (
+                                <p className="errorR">{addressError}</p>
+                            )}
+
                         </div>
                     </div>
 
@@ -314,30 +377,29 @@ export default function Registeration() {
                         <div className={classes.formgroup}>
                             <label className={classes.labeled}>Mechanic Type<sup className="field-required">*</sup></label><br />
                             <Select
-                                className='selector'
+                                className={`selector ${mechanicTypeError ? "dirty-input" : ""}`}
                                 value={mechanicType}
                                 onChange={handleMechanicTypeChange}
                                 displayEmpty
                                 inputProps={{ 'aria-label': 'Without label' }}
                             >
-                                <MenuItem value="">
-                                    <em>None</em>
-                                </MenuItem>
                                 <MenuItem value="Car">Car</MenuItem>
                                 <MenuItem value="Bike">Bike</MenuItem>
                             </Select>
+                            {mechanicTypeError && (
+                                <p className="errorR">{mechanicTypeError}</p>
+                            )}
                         </div>
 
                         <div className={classes.formgroup}>
                             <label className={classes.labeled}>Speciality<sup className="field-required">*</sup></label><br />
-                            <input
-                                type='text'
-                                autoComplete={'Speciality'}
-                                placeholder=''
-                                className='form-controlR'
-                                value={speciality}
-                                onChange={handleSpecialityChange}
-                            />
+
+                            {selectSpeciality()}
+
+
+                            {specialityError && (
+                                <p className="errorR">{specialityError}</p>
+                            )}
                         </div>
 
                     </div>
@@ -350,10 +412,13 @@ export default function Registeration() {
                                 type='text'
                                 autoComplete='Text'
                                 placeholder=''
-                                className='form-controlR'
+                                className={`form-controlR ${usernameError ? "dirty-input" : ""}`}
                                 value={username}
                                 onChange={handleUserNameChange}
                             />
+                            {usernameError && (
+                                <p className="errorR">{usernameError}</p>
+                            )}
                         </div>
 
                         <div className={classes.formgroup}>
@@ -384,10 +449,13 @@ export default function Registeration() {
                                 type='password'
                                 autoComplete='Password'
                                 placeholder=''
-                                className='form-controlR'
+                                className={`form-controlR ${passError ? "dirty-input" : ""}`}
                                 value={password}
                                 onChange={handlePasswordChange}
                             />
+                            {passError && (
+                                <p className="errorR">{passError}</p>
+                            )}
                         </div>
 
                         <div className={classes.formgroup}>
@@ -397,12 +465,12 @@ export default function Registeration() {
                                 type='password'
                                 autoComplete='Confirm Password'
                                 placeholder=''
-                                className={`form-controlR ${message ? "dirty-input" : ""} `}
+                                className={`form-controlR ${confirmpassError ? "dirty-input" : ""} `}
                                 value={confirmpassword}
                                 onChange={handleConfirmPasswordChange}
                             />
-                            {message && (
-                                <p className="errorR">{message}</p>
+                            {confirmpassError && (
+                                <p className="errorR">{confirmpassError}</p>
                             )}
 
                         </div>
